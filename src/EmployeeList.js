@@ -14,13 +14,13 @@ const [newGender, setNewGender] = useState('')
 const [newSalary, setNewSalary] = useState(0)
   
 useEffect(() => {
-    Axios.get("http://localhost:3001/read").then((response) => {
+    Axios.get("https://fullstack-backend.vercel.app/read").then((response) => {
     setEmployeeList(response.data)
     });
 }, []);
 
 const updateEmployee = (id) => {
-    Axios.put("http://localhost:3001/update", {
+    Axios.put("https://fullstack-backend.vercel.app/update", {
         id: id,
         newFName: newFName,
         newLName: newLName,
