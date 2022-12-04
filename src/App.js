@@ -18,6 +18,9 @@ function App() {
   const [newSalary, setNewSalary] = useState(0)
 
   useEffect(() => {
+    const validation = () => {
+      
+    }
     Axios.get("https://fullstack-backend.vercel.app/read").then((response) => {
       setEmployeeList(response.data)
     });
@@ -45,7 +48,7 @@ function App() {
     Axios.delete(`https://fullstack-backend.vercel.app/delete/${id}`);
   }
 
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(false)
   
   return (
     <div className="App">
