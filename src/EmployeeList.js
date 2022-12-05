@@ -2,10 +2,9 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from "react";
 import Axios from 'axios';
-import ("./App.js");
 
 
-function App (){
+function EmployeePage (){
 
 const [employeeList, setEmployeeList] = useState([])
 const [newFName, setNewFName] = useState('')
@@ -14,13 +13,13 @@ const [newGender, setNewGender] = useState('')
 const [newSalary, setNewSalary] = useState(0)
   
 useEffect(() => {
-    Axios.get("https://fullstack-backend.vercel.app/read").then((response) => {
+    Axios.get("http://localhost:3001/read").then((response) => {
     setEmployeeList(response.data)
     });
 }, []);
 
 const updateEmployee = (id) => {
-    Axios.put("https://fullstack-backend.vercel.app/update", {
+    Axios.put("http://localhost:3001/update", {
         id: id,
         newFName: newFName,
         newLName: newLName,
@@ -80,4 +79,4 @@ return(
   })}
   </div>
 )}
-export default App
+export default EmployeePage

@@ -3,8 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from "react";
 import Axios from 'axios';
-
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import EmployeePage from './EmployeeList';
+import { useNavigate} from "react-router-dom";
 function App() {
+  
+  let navigate = useNavigate();
+  navigate.push('/EmployeeList')
 
   const [fName, setFName] = useState('');
   const [lName, setLName] = useState('');
@@ -19,15 +24,15 @@ function App() {
 
   useEffect(() => {
     const validation = () => {
-      
+
     }
-    Axios.get("https://fullstack-backend.vercel.app/read").then((response) => {
+    Axios.get("http://localhost:3001/read").then((response) => {
       setEmployeeList(response.data)
     });
   }, []);
 
   const addEmployee = () =>{
-    Axios.post("https://fullstack-backend.vercel.app/insert", {
+    Axios.post("http://localhost:3001/insert", {
       fName : fName,
       lName: lName,
       gender: gender,
@@ -36,7 +41,7 @@ function App() {
   }
 
   const updateEmployee = (id) => {
-    Axios.put("https://fullstack-backend.vercel.app/update", {
+    Axios.put("http://localhost:3001/update", {
       id: id,
       newFName: newFName,
       newLName: newLName,
@@ -45,7 +50,7 @@ function App() {
     })
   }
   const deleteEmployee = (id) => {
-    Axios.delete(`https://fullstack-backend.vercel.app/delete/${id}`);
+    Axios.delete(`http://localhost:3001/delete/${id}`);
   }
 
   const [show, setShow] = useState(false)
@@ -128,6 +133,13 @@ function App() {
               />
             <button onClick={()=> updateEmployee(val._id)}> Update</button>
             <button onClick={()=> deleteEmployee(val._id)}> Delete</button>
+
+            <Router>
+              <Routes>
+                <Route exact path="/employeeslist" component={EmployeePage}/>  
+              </Routes>
+            </Router>
+
           </div>
       : null }</div>
         );
