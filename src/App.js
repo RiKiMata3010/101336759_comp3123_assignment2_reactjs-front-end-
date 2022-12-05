@@ -19,9 +19,6 @@ function Home() {
   const [newSalary, setNewSalary] = useState(0)
 
   useEffect(() => {
-    const validation = () => {
-
-    }
     Axios.get("https://fullstack-backend.vercel.app/read").then((response) => {
       setEmployeeList(response.data)
     });
@@ -93,6 +90,8 @@ function Home() {
       
       <button onClick={()=>setShow(true)}>View List</button>
       <button onClick={()=>setShow(false)}>Hide List</button>
+        
+      <div className='Whole'>
       {employeeList.map((val, key) => {
         return (
           <div>{ show?
@@ -131,15 +130,13 @@ function Home() {
               }}
               />
             <button onClick={()=> updateEmployee(val._id)}> Update</button>
-            <button onClick={()=> deleteEmployee(val._id)}> Delete</button>
-
+            <button onClick={()=> deleteEmployee(val._id)}> Delete</button>     
           </div>
       : null }</div>
         );
       })}
     </div>
-    
-    
+    </div>   
   );
 }
 

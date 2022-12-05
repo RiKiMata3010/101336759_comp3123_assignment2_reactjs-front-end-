@@ -7,6 +7,10 @@
   background-image: url('reactbg.png');
   color: white;
 }
+.Whole{
+  background-image: url('reactbg.png');
+  background-size: cover;
+}
 
 input, button {
   width: 250px;
