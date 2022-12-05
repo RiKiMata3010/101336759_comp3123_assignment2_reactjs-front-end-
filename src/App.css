@@ -4,6 +4,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-image: url('reactbg.png');
+  color: white;
 }
 
 input, button {
@@ -14,7 +16,9 @@ input, button {
 }
 .employee {
   width: 500px;
-  height: 600px;
+  height: 500px;
   border: 2px solid black;
   margin: 10px;
+  background-color: antiquewhite;
+  color: black;
 }

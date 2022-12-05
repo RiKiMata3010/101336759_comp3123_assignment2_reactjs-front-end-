@@ -3,13 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from "react";
 import Axios from 'axios';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import EmployeePage from './EmployeeList';
-import { useNavigate} from "react-router-dom";
-function App() {
-  
-  let navigate = useNavigate();
-  navigate.push('/EmployeeList')
+
+
+function Home() {
 
   const [fName, setFName] = useState('');
   const [lName, setLName] = useState('');
@@ -26,13 +22,13 @@ function App() {
     const validation = () => {
 
     }
-    Axios.get("http://localhost:3001/read").then((response) => {
+    Axios.get("https://fullstack-backend.vercel.app/read").then((response) => {
       setEmployeeList(response.data)
     });
   }, []);
 
   const addEmployee = () =>{
-    Axios.post("http://localhost:3001/insert", {
+    Axios.post("https://fullstack-backend.vercel.app/insert", {
       fName : fName,
       lName: lName,
       gender: gender,
@@ -41,7 +37,7 @@ function App() {
   }
 
   const updateEmployee = (id) => {
-    Axios.put("http://localhost:3001/update", {
+    Axios.put("https://fullstack-backend.vercel.app/update", {
       id: id,
       newFName: newFName,
       newLName: newLName,
@@ -50,14 +46,15 @@ function App() {
     })
   }
   const deleteEmployee = (id) => {
-    Axios.delete(`http://localhost:3001/delete/${id}`);
+    Axios.delete(`https://fullstack-backend.vercel.app/delete/${id}`);
   }
 
   const [show, setShow] = useState(false)
   
+
   return (
     <div className="App">
-      <h1>CRUD FullStack Assignment 2</h1>
+      <h1>Full-Stack Assignment 02</h1>
 
       <label>First Name : </label>
       <input 
@@ -88,20 +85,22 @@ function App() {
         }}  
       />
       <button onClick={addEmployee}>Add Employee</button>
+      
 
       <br/>
 
       <h1>Employees List</h1>
+      
       <button onClick={()=>setShow(true)}>View List</button>
       <button onClick={()=>setShow(false)}>Hide List</button>
       {employeeList.map((val, key) => {
         return (
           <div>{ show?
           <div key={key} className="employee">
-            <h1>{val.first_name}</h1> 
-            <h1>{val.last_name}</h1> 
-            <h1>{val.gender}</h1> 
-            <h1>{val.salary}</h1>{" "}
+            <h3>First Name : {val.first_name}</h3> 
+            <h3>Last Name : {val.last_name}</h3> 
+            <h3>Gender : {val.gender}</h3> 
+            <h3>Salary : {val.salary}</h3>{" "}
 
             <input 
               type="text" 
@@ -134,19 +133,14 @@ function App() {
             <button onClick={()=> updateEmployee(val._id)}> Update</button>
             <button onClick={()=> deleteEmployee(val._id)}> Delete</button>
 
-            <Router>
-              <Routes>
-                <Route exact path="/employeeslist" component={EmployeePage}/>  
-              </Routes>
-            </Router>
-
           </div>
       : null }</div>
         );
       })}
     </div>
     
+    
   );
 }
 
-export default App;
+export default Home;
